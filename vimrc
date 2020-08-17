@@ -1,8 +1,13 @@
+"-----
 "License - http://www.apache.org/licenses/LICENSE-2.0.html
 "
-"Author Prahsant Sadashiv Khanwale
+"Author Prahsant Sadashiv Khanwale, Credit belong to the internet
 "Allow mouse integration - take this out for character only systems
 "A lot of credit to the entire internet.
+"Package management
+execute pathogen#infect()
+syntax enable
+
 set mouse=a
 
 "Enable all VIM featrures
@@ -14,9 +19,6 @@ set timeout timeoutlen=2000 ttimeoutlen=600
 "Remap window key to \w
 noremap <leader>w <c-w>
 
-"Package management
-execute pathogen#infect()
-
 syntax on
 syntax enable
 
@@ -25,8 +27,9 @@ syntax enable
 set visualbell t_vb=
 set tm=500
 
-"Set numbers on
+"Set numbers and relative numbers on
 set nu
+set relativenumber
 "Keep last 50 search patterns
 set history=50
 "Show incomplete commands at bottom right
@@ -39,9 +42,9 @@ set autoread
 set smartcase
 " Solarized
 
-set background=light
-let g:solarized_termcolors = 256
-colorscheme solarized
+"set background=light
+"let g:solarized_termcolors = 256
+"colorscheme solarized
 
 "ctags
 set tags=tags;/
@@ -50,7 +53,7 @@ noremap <leader>t <esc>:TagbarToggle<CR>
 noremap <leader>c <c-_><c-_>
 
 " http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
-:autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+":autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
 filetype plugin indent on
 
@@ -79,8 +82,8 @@ set shiftwidth=2
 set softtabstop=2
 "Show ¬ at the end of line and ▸ for tabs
 set listchars=tab:▸\ ,eol:¬
+"The list the can cause a bit of a problem on some terminals."
 set list
-"The last the can cause a bit of a problem on some terminals."
 
 " NerdTree
 map <leader>n :NERDTreeToggle<cr>
@@ -187,5 +190,18 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class     " MacOSX/Linux
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-"ctags -R "--exclude=*.js" "--exclude=target" "--exclude=vendor"
-""--exclude=lib" ./*
+"----
+set background=light
+colorscheme solarized
+let g:Powerline_symbols = 'fancy'
+
+"----- Airline --------------
+let g:airline_powerline_fonts = 1
+"----- Nerdtree --------------
+"How can I open a NERDTree automatically when vim starts up?
+" UNCOMMENT ^  autocmd StdinReadPre * let s:std_in=1
+"How can I open a NERDTree automatically when vim starts up if no files were specified?
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"How can I close vim if the only window left open is a NERDTree?
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
