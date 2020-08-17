@@ -1,0 +1,22 @@
+alias mci="mvn clean install -l /Volumes/logs/build.log  || (tail -20 /Volumes/logs/build.log ; false)"
+alias blog="slt3 /Volumes/logs/build.log"
+alias tlog="slt3 /Volumes/logs/test.log"
+alias svn="/usr/local/bin/svn"
+alias svn-add='svn status | grep "^\?"|cut -d " "  -f 8 | xargs svn add'
+alias drop-non-svn='svn status | grep "^\?"|cut -d " "  -f 8 | xargs rm'
+alias mg='mvn -q clean verify && git status && git add \. && git commit -m "Builds OK"'
+alias rmq-stop="/usr/local/Cellar/rabbitmq/3.6.14/sbin/rabbitmqctl stop"
+alias cpwd='pwd | pbcopy'
+alias cdwd='cd `pbpaste`'
+alias kc='pgrep -u `whoami` -f cassandra  | xargs kill'
+alias python=python3
+alias slt3="/Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text&"
+alias lnc="lynx -cookie-save-file\=/Volumes/logs/lynx.cookies --accept-all-cookies -cookies\=off"
+alias mvn-run="mvn exec:java -Dexec.mainClass=$1"
+search(){
+    lynx "https://www.google.com/search?q=$1" -cookie-save-file=/Volumes/logs/lynx.cookies -accept-all-cookies -cookies\=off
+}
+lstn(){
+  lsof -nP -i4TCP:"$1" | grep LISTEN
+}
+
